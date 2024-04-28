@@ -1,12 +1,16 @@
 const World1Config = {
-    backgroundPossitions: [
+    backgroundPositions: [
         {x: 960, y: -512}
     ],
-    GroundPossistions: [
+    GroundPositions: [
         {x: 960, y: 1000}
     ],
-    Plants : [
+    PlantsPositions : [
         {x: 960, y: 975}
+    ],
+    CloudsPosistions: [
+        {x: 960, y: -512},
+        {x: 2880, y: -512}
     ]
 
 };
