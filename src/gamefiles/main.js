@@ -13,7 +13,7 @@ export default new Phaser.Game({
         default: 'arcade',
         arcade: {
             gravity: { y: 10 },
-            debug: true,
+            //debug: true,
         }
     },
     scene: [

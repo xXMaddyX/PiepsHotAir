@@ -33,7 +33,7 @@ export default class SceneLvL1 extends Phaser.Scene {
         Player.initAnimations(this);
         this.player = new Player(this, this.world);
         this.player.initKeybord();
-        this.player.create(600, 400);
+        this.player.create(600, 850);
         this.physics.add.collider(this.player.pieps, this.world.plattforms)
         this.player.setFollowCamera(this.worldBounds.worldWidth, this.worldBounds.worldHeight)
     };

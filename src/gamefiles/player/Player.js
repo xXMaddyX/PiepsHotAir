@@ -18,7 +18,6 @@ export default class Player {
         this.isBlowing = false;
         this.isWind = false;
         this.WIND_DATA = {
-            DIRECTION: "",
             SPEED: 0,
         }
     };
@@ -62,11 +61,21 @@ export default class Player {
         this.scene.physics.add.overlap(this.pieps, this.world.windArea1, () => {
             this.setWindData("RIGHT", 20)
             if (this.pieps.body.velocity.x < this.WIND_DATA.SPEED) {
-                this.windHandler(this.WIND_DATA.DIRECTION)
+                this.windHandler()
             } else {
                 this.pieps.setAccelerationX(0)
             }
         });
+
+        this.scene.physics.add.overlap(this.pieps, this.world.windArea2, () => {
+            this.setWindData("LEFT", -20)
+            if (this.pieps.body.velocity.x > this.WIND_DATA.SPEED) {
+                this.windHandler()
+            } else {
+                this.pieps.setAccelerationX(0)
+            }
+        });
+
     };
 
     setWindData(direction, speed) {
@@ -97,13 +106,8 @@ export default class Player {
         });
     }
 
-    windHandler(newWindData) {
-        switch (newWindData) {
-            case "RIGHT":
-                console.log(this.WIND_DATA.SPEED)
-                this.pieps.setAccelerationX(this.WIND_DATA.SPEED)
-                break;
-        }
+    windHandler() {
+        this.pieps.setAccelerationX(this.WIND_DATA.SPEED)
     }
 
     moveSlowdownFunc() {
@@ -120,11 +124,12 @@ export default class Player {
 
     update(time, delta) {
         if (this.pieps && this.pieps.body) {
+            console.log(this.pieps.body.velocity.x)
             if (this.controls.movingKeys.up.isDown && !this.isBlowing) {
                 this.blowFire();
             };
 
-            if (!this.scene.physics.world.overlap(this.pieps, this.world.windArea1)) {
+            if (!this.scene.physics.world.overlap(this.pieps, this.world.windArea1) && !this.scene.physics.world.overlap(this.pieps, this.world.windArea2)) {
                 this.moveSlowdownFunc();
             };
         };
