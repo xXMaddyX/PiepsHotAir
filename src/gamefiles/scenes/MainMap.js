@@ -8,6 +8,10 @@ export default class SceneLvL1 extends Phaser.Scene {
     };
 
     initScene() {
+        this.worldBounds = {
+            worldHeight: 3072,
+            worldWidth: 1920,
+        }
     };
     
     preload() {
@@ -20,12 +24,18 @@ export default class SceneLvL1 extends Phaser.Scene {
     };
 
     create() {
+        this.initScene();
+        this.physics.world.setBounds(0, -2048, this.worldBounds.worldWidth, this.worldBounds.worldHeight)
+
         this.world = new World1(this);
         this.world.create();
 
         Player.initAnimations(this);
-        this.player = new Player(this);
+        this.player = new Player(this, this.world);
+        this.player.initKeybord();
         this.player.create(600, 400);
+        this.physics.add.collider(this.player.pieps, this.world.plattforms)
+        this.player.setFollowCamera(this.worldBounds.worldWidth, this.worldBounds.worldHeight)
     };
 
     update(time, delta) {

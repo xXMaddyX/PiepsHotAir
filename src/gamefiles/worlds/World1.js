@@ -43,12 +43,21 @@ export default class World1 {
             let cloudTile = this.scene.add.image(x, y, "lvl1Clouds");
             this.cloudsPool.push(cloudTile);
         });
+
+        this.windArea1 = this.scene.physics.add.sprite(960, 500, null);
+        this.windArea1.setGravityY(-10);
+        this.windArea1.setVisible(false);
+        this.windArea1.setBodySize(1920, 200);
+
+        this.windArea2 = this.scene.physics.add.sprite(960, 0, null);
+        this.windArea2.setGravityY(-10);
+        this.windArea2.setVisible(false);
+        this.windArea2.setBodySize(1920, 200);
     };
 
     update(time, delta) {
         this.cloudsPool.forEach(clouds => {
             clouds.x -= 0.3
-            console.log(clouds.x)
             if (clouds.x <= -960) {
                 clouds.x = 2880
             }
