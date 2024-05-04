@@ -109,7 +109,7 @@ export default class SceneLvL1 extends Phaser.Scene {
         //Planes Update
         this.planePool.forEach(plane => {
             plane.update();
-            if (plane.plane.x < this.physics.world.bounds.x) {
+            if (plane.plane.x < this.physics.world.bounds.x - 100) {
                 let RandomHeight = Phaser.Math.Between(-700, -900)
                 plane.plane.x = 6000;
                 plane.plane.y = RandomHeight;
