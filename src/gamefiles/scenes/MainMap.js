@@ -9,7 +9,7 @@ export default class SceneLvL1 extends Phaser.Scene {
 
     initScene() {
         this.worldBounds = {
-            worldHeight: 3072,
+            worldHeight: 2048,
             worldWidth: 5760,
         };
     };
@@ -60,7 +60,7 @@ export default class SceneLvL1 extends Phaser.Scene {
         Player.initAnimations(this);
         this.player = new Player(this);
         this.player.initKeybord();
-        this.player.create(600, 850);
+        this.player.create(600, -175);
         this.createWorldWindOverlaps();
         this.physics.add.collider(this.player.pieps, this.world.plattforms)
         this.player.setFollowCamera(this.worldBounds.worldWidth, this.worldBounds.worldHeight)

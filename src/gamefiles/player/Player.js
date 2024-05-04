@@ -46,7 +46,7 @@ export default class Player {
     };
 
     create(x, y) {
-        this.pieps = this.scene.physics.add.sprite(x, y, "PlayerBallon").setScale(2);
+        this.pieps = this.scene.physics.add.sprite(x, y, "PlayerBallon").setScale(2).setDepth(3);
         this.pieps.setCollideWorldBounds(true);
         this.pieps.setBodySize(60, 127, true);
     };
