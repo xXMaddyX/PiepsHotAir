@@ -3,6 +3,7 @@ import World1 from "../worlds/World1";
 import Player from "../player/Player";
 import PlaneClass from "../Plane/Plane";
 import World1Config from "../worlds/World1Config";
+import ThunderCloudeClass from "../thundercloude/ThunderCloude";
 
 export default class SceneLvL1 extends Phaser.Scene {
     constructor() {
@@ -26,6 +27,9 @@ export default class SceneLvL1 extends Phaser.Scene {
 
         //Load PlaneSprites
         PlaneClass.loadSprites(this);
+
+        //Load ThunderCloude Sprites
+        ThunderCloudeClass.loadSprites(this);
     };
 
     createWorldWindOverlaps() {
@@ -58,6 +62,11 @@ export default class SceneLvL1 extends Phaser.Scene {
         });
     };
 
+    spawnThunderClouds() {
+        this.thunderCloude = new ThunderCloudeClass(this, this.player);
+        this.thunderCloude.create(1500, -500);
+    };
+
     create() {
         //Init Scene
         this.initScene();
@@ -81,12 +90,21 @@ export default class SceneLvL1 extends Phaser.Scene {
         //Create Planes
         PlaneClass.intitAnimations(this);
         this.spawnPlanes();
+
+        //Create ThunderClouds
+        ThunderCloudeClass.initAnimations(this);
+        this.spawnThunderClouds();
     };
 
     update(time, delta) {
         //Update Onjects
         this.world.update();
         this.player.update();
+        this.thunderCloude.update();
+
+        if (this.thunderCloude.ThunderCloude.x < this.physics.world.bounds.x -100) {
+            this.thunderCloude.ThunderCloude.x = 2500
+        }
 
         //Planes Update
         this.planePool.forEach(plane => {
