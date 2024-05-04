@@ -7,6 +7,11 @@ import Berge from '../assets/backgrounds/Berge.png';
 import StartPlattform from '../assets/plattforms/StartPlattform.png';
 import HochausVer1 from '../assets/backgrounds/Hochhaus.png';
 
+//NPCs
+import Plane from '../assets/mobs/Plane.png';
+import Bird from '../assets/mobs/Bird.png';
+import ThunderCloude from '../assets/mobs/GwitterWolke.png';
+
 export {
     BackGroundLvL1,
     GroundLvL1,
@@ -16,4 +21,7 @@ export {
     Berge,
     StartPlattform,
     HochausVer1,
+    Plane,
+    Bird,
+    ThunderCloude,
 };

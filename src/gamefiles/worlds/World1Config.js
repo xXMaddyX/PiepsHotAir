@@ -1,3 +1,7 @@
+const calcTilePosX = (actualTilePos) => {
+    return actualTilePos + 960;
+};
+
 const World1Config = {
     backgroundPositions: [
         {x: 960, y: -1024},
@@ -15,9 +19,9 @@ const World1Config = {
         {x: 4800, y: -40},
     ],
     CloudsPosistions: [
-        {x: 960, y: -1024},
-        {x: 2880, y: -1024},
-        {x: 4800, y: -1024},
+        {x: 960, y: -1324},
+        {x: 2880, y: -1324},
+        {x: 4800, y: -1324},
     ],
     Berge: [
         {x: 300, y: -450},
@@ -26,11 +30,18 @@ const World1Config = {
         {x: 1690, y: -250},
 
     ],
+    HochausPosition: [
+        {x: 2400, y: -350}
+    ],
     WindFields: [
-        {posx: 960, posY: -450, width: 1920, height: 200, direction: "RIGHT", speed: 30},
-        {posx: 960, posY: -900, width: 1920, height: 200, direction: "LEFT", speed: -30},
-    ]
-
+        {posx: calcTilePosX(0), posY: -550, width: 1920, height: 200, direction: "RIGHT", speed: 30},
+        {posx: calcTilePosX(0), posY: -1100, width: 1520, height: 200, direction: "LEFT", speed: -30},
+        {posx: calcTilePosX(1920) - 100, posY: -1100, width: 1920, height: 200, direction: "RIGHT", speed: 30},
+    ],
+    PlanePositions: [
+        {x: 2400, y: -700},
+        //{x: 5000, y: -900}
+    ],
 };
 
 export default World1Config;

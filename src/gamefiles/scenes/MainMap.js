@@ -1,6 +1,8 @@
 import Phaser from "phaser";
 import World1 from "../worlds/World1";
 import Player from "../player/Player";
+import PlaneClass from "../Plane/Plane";
+import World1Config from "../worlds/World1Config";
 
 export default class SceneLvL1 extends Phaser.Scene {
     constructor() {
@@ -8,6 +10,7 @@ export default class SceneLvL1 extends Phaser.Scene {
     };
 
     initScene() {
+        this.planePool = [];
         this.worldBounds = {
             worldHeight: 2048,
             worldWidth: 5760,
@@ -21,6 +24,8 @@ export default class SceneLvL1 extends Phaser.Scene {
         //Load PlayerSprites
         Player.loadSprites(this);
 
+        //Load PlaneSprites
+        PlaneClass.loadSprites(this);
     };
 
     createWorldWindOverlaps() {
@@ -45,6 +50,14 @@ export default class SceneLvL1 extends Phaser.Scene {
         });
     };
 
+    spawnPlanes() {
+        World1Config.PlanePositions.forEach(({x, y}) => {
+            this.plane = new PlaneClass(this, this.player);
+            this.plane.create(x, y);
+            this.planePool.push(this.plane);
+        });
+    };
+
     create() {
         //Init Scene
         this.initScene();
@@ -60,16 +73,30 @@ export default class SceneLvL1 extends Phaser.Scene {
         Player.initAnimations(this);
         this.player = new Player(this);
         this.player.initKeybord();
-        this.player.create(600, -175);
+        this.player.create(200, -230);
         this.createWorldWindOverlaps();
-        this.physics.add.collider(this.player.pieps, this.world.plattforms)
-        this.player.setFollowCamera(this.worldBounds.worldWidth, this.worldBounds.worldHeight)
+        this.physics.add.collider(this.player.pieps, this.world.plattforms);
+        this.player.setFollowCamera(this.worldBounds.worldWidth, this.worldBounds.worldHeight);
+
+        //Create Planes
+        PlaneClass.intitAnimations(this);
+        this.spawnPlanes();
     };
 
     update(time, delta) {
         //Update Onjects
         this.world.update();
         this.player.update();
+
+        //Planes Update
+        this.planePool.forEach(plane => {
+            plane.update();
+            if (plane.plane.x < this.physics.world.bounds.x) {
+                let RandomHeight = Phaser.Math.Between(-700, -900)
+                plane.plane.x = 6000;
+                plane.plane.y = RandomHeight;
+            };
+        });
 
         //Check Player & Wind Overlap
         let isOverlapping = false;

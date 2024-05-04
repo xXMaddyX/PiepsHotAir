@@ -17,6 +17,7 @@ export default class World1 {
         this.cloudsPool = [];
         this.windAreaPool = [];
         this.bergePool = [];
+        this.BuildingPool = [];
         this.changeDirection = false;
     };
 
@@ -43,12 +44,15 @@ export default class World1 {
             this.plattforms.add(plattform);
         });
 
+        let StartPlattform = this.scene.add.sprite(200, -70, "lvl1StartPlattform").setDepth(3);
+        this.plattforms.add(StartPlattform)
+
         World1Config.PlantsPositions.forEach(({x, y}) => {
             this.scene.add.image(x, y, "lvl1Plants").setDepth(3);
         });
 
         World1Config.CloudsPosistions.forEach(({x, y}) => {
-            let cloudTile = this.scene.add.image(x, y, "lvl1Clouds").setDepth(2);
+            let cloudTile = this.scene.add.image(x, y, "lvl1Clouds").setDepth(4);
             this.cloudsPool.push(cloudTile);
         });
 
@@ -56,7 +60,13 @@ export default class World1 {
             let Berg = this.scene.add.image(x, y, "lvl1Berge").setDepth(1);
             Berg.origX = Berg.x;
             this.bergePool.push(Berg);
-        })
+        });
+
+        World1Config.HochausPosition.forEach(({x, y}) => {
+            let Hochaus = this.scene.physics.add.sprite(x, y, "lvl1HochausVer1").setDepth(1).setScale(1);
+            Hochaus.setGravityY(-10);
+            this.BuildingPool.push(Hochaus);
+        });
 
         World1Config.WindFields.forEach(field => {
             let windArea = this.scene.physics.add.sprite(field.posx, field.posY, null);
