@@ -97,7 +97,6 @@ export default class Player {
 
     update(time, delta) {
         if (this.pieps && this.pieps.body) {
-            console.log(this.pieps.body.velocity.x)
             if (this.controls.movingKeys.up.isDown && !this.isBlowing) {
                 this.blowFire();
             };
