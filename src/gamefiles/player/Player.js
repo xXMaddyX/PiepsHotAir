@@ -1,6 +1,4 @@
 import Phaser from "phaser";
-import World1 from "../worlds/World1";
-import Config from "./playerConfig";
 import { PlayerBaloon } from "../assetLoader/AssetLoader";
 
 const MOVING_STATS = {
@@ -8,12 +6,9 @@ const MOVING_STATS = {
 }
 
 export default class Player {
-    constructor(scene, world) {
+    constructor(scene) {
         /**@type {Phaser.Scene} */
         this.scene = scene;
-        /**@type {World1} */
-        this.world = world;
-        this.config = Config;
         this.timer = 2000;
         this.isBlowing = false;
         this.isWind = false;
@@ -54,28 +49,6 @@ export default class Player {
         this.pieps = this.scene.physics.add.sprite(x, y, "PlayerBallon").setScale(2);
         this.pieps.setCollideWorldBounds(true);
         this.pieps.setBodySize(60, 127, true);
-        this.createWorldWindOverlaps();
-    };
-
-    createWorldWindOverlaps() {
-        this.scene.physics.add.overlap(this.pieps, this.world.windArea1, () => {
-            this.setWindData("RIGHT", 20)
-            if (this.pieps.body.velocity.x < this.WIND_DATA.SPEED) {
-                this.windHandler()
-            } else {
-                this.pieps.setAccelerationX(0)
-            }
-        });
-
-        this.scene.physics.add.overlap(this.pieps, this.world.windArea2, () => {
-            this.setWindData("LEFT", -20)
-            if (this.pieps.body.velocity.x > this.WIND_DATA.SPEED) {
-                this.windHandler()
-            } else {
-                this.pieps.setAccelerationX(0)
-            }
-        });
-
     };
 
     setWindData(direction, speed) {
@@ -127,10 +100,6 @@ export default class Player {
             console.log(this.pieps.body.velocity.x)
             if (this.controls.movingKeys.up.isDown && !this.isBlowing) {
                 this.blowFire();
-            };
-
-            if (!this.scene.physics.world.overlap(this.pieps, this.world.windArea1) && !this.scene.physics.world.overlap(this.pieps, this.world.windArea2)) {
-                this.moveSlowdownFunc();
             };
         };
     };

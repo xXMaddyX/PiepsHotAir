@@ -12,6 +12,7 @@ export default class World1 {
         /**@type {Phaser.Scene} */
         this.scene = scene;
         this.cloudsPool = [];
+        this.windAreaPool = [];
         this.changeDirection = false;
     };
 
@@ -44,22 +45,22 @@ export default class World1 {
             this.cloudsPool.push(cloudTile);
         });
 
-        this.windArea1 = this.scene.physics.add.sprite(960, 500, null);
-        this.windArea1.setGravityY(-10);
-        this.windArea1.setVisible(false);
-        this.windArea1.setBodySize(1920, 200);
-
-        this.windArea2 = this.scene.physics.add.sprite(960, 0, null);
-        this.windArea2.setGravityY(-10);
-        this.windArea2.setVisible(false);
-        this.windArea2.setBodySize(1920, 200);
+        World1Config.WindFields.forEach(field => {
+            let windArea = this.scene.physics.add.sprite(field.posx, field.posY, null);
+            windArea.setGravityY(-10);
+            windArea.setVisible(false);
+            windArea.setBodySize(field.width, field.height);
+            windArea.direction = field.direction;
+            windArea.speed = field.speed;
+            this.windAreaPool.push(windArea);
+        });
     };
 
     update(time, delta) {
         this.cloudsPool.forEach(clouds => {
             clouds.x -= 0.3
             if (clouds.x <= -960) {
-                clouds.x = 2880
+                clouds.x = 4800
             }
         });
     };
