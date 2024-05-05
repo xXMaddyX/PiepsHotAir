@@ -12,6 +12,7 @@ export default class SceneLvL1 extends Phaser.Scene {
 
     initScene() {
         this.planePool = [];
+        this.thundercloudePool = [];
         this.worldBounds = {
             worldHeight: 2048,
             worldWidth: 5760,
@@ -35,21 +36,21 @@ export default class SceneLvL1 extends Phaser.Scene {
     createWorldWindOverlaps() {
         this.world.windAreaPool.forEach(wind => {
             this.physics.add.overlap(this.player.pieps, wind, () => {
-                this.player.setWindData(wind.direction, wind.speed)
+                this.player.setWindData(wind.direction, wind.speed);
                 if (wind.speed > 0) {
                     if (this.player.pieps.body.velocity.x < this.player.WIND_DATA.SPEED) {
-                        this.player.windHandler()
+                        this.player.windHandler();
                     } else {
-                        this.player.pieps.setAccelerationX(0)
+                        this.player.pieps.setAccelerationX(0);
                     };
-                }
+                };
                 if (wind.speed < 0) {
                     if (this.player.pieps.body.velocity.x > this.player.WIND_DATA.SPEED) {
-                        this.player.windHandler()
+                        this.player.windHandler();
                     } else {
-                        this.player.pieps.setAccelerationX(0)
+                        this.player.pieps.setAccelerationX(0);
                     };
-                }
+                };
             });
         });
     };
@@ -63,8 +64,11 @@ export default class SceneLvL1 extends Phaser.Scene {
     };
 
     spawnThunderClouds() {
-        this.thunderCloude = new ThunderCloudeClass(this, this.player);
-        this.thunderCloude.create(2000, -500);
+        World1Config.ThunderCloudePositions.forEach(({x , y}) => {
+            let thunderCloude = new ThunderCloudeClass(this, this.player);
+            thunderCloude.create(x, y);
+            this.thundercloudePool.push(thunderCloude);
+        });
     };
 
     create() {
@@ -100,11 +104,14 @@ export default class SceneLvL1 extends Phaser.Scene {
         //Update Onjects
         this.world.update();
         this.player.update();
-        this.thunderCloude.update();
-
-        if (this.thunderCloude.ThunderCloude.x < this.physics.world.bounds.x -100) {
-            this.thunderCloude.ThunderCloude.x = 2500
-        }
+        
+        this.thundercloudePool.forEach(thunderCloude => {
+            thunderCloude.update();
+    
+            if (thunderCloude.ThunderCloude.x < this.physics.world.bounds.x -100) {
+                thunderCloude.ThunderCloude.x = 2500;
+            };
+        });
 
         //Planes Update
         this.planePool.forEach(plane => {

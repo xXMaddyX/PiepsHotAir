@@ -59,6 +59,5 @@ export default class PlaneClass {
         if (this.soundIsReady && distanceToPlayer < 2500) {
             this.airplaneSoundHandler(distanceToPlayer);
         };
-        console.log(this.soundIsReady)
     };
 };

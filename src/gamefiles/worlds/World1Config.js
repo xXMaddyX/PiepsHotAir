@@ -33,6 +33,9 @@ const World1Config = {
     HochausPosition: [
         {x: 2400, y: -350}
     ],
+    SmallHousePositions: [
+        {x: 0, y:0},
+    ],
     WindFields: [
         {posx: calcTilePosX(0), posY: -550, width: 1920, height: 200, direction: "RIGHT", speed: 30},
         {posx: calcTilePosX(0), posY: -1100, width: 1520, height: 200, direction: "LEFT", speed: -30},
@@ -41,6 +44,11 @@ const World1Config = {
     PlanePositions: [
         {x: 6000, y: -700},
         //{x: 5000, y: -900}
+    ],
+    ThunderCloudePositions: [
+        {x: 2000, y: -500},
+        {x: 4000, y: -1000},
+        {x: 6000, y: -800},
     ],
 };
 

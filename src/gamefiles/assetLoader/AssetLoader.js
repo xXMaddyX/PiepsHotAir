@@ -6,6 +6,8 @@ import PlayerBaloon from '../assets/Player/Ballon.png';
 import Berge from '../assets/backgrounds/Berge.png';
 import StartPlattform from '../assets/plattforms/StartPlattform.png';
 import HochausVer1 from '../assets/backgrounds/Hochhaus.png';
+import SmallHouse from '../assets/backgrounds/SmalHouse.png';
+import BigTree from '../assets/trees/Tree.png';
 
 //Sounds
 import AmbienteSound from '../assets/sounds/AmbienteSound.wav';
@@ -17,6 +19,7 @@ import Airplane from '../assets/sounds/Airplane.wav';
 import Plane from '../assets/mobs/Plane.png';
 import Bird from '../assets/mobs/Bird.png';
 import ThunderCloude from '../assets/mobs/GwitterWolke.png';
+import JetPlane from '../assets/mobs/JetPlane.png';
 
 export {
     BackGroundLvL1,
@@ -30,6 +33,9 @@ export {
     Plane,
     Bird,
     ThunderCloude,
+    SmallHouse,
+    BigTree,
+    JetPlane,
 
     //Sounds
     AmbienteSound,
