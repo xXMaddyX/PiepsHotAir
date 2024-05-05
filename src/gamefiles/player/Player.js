@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { PlayerBaloon } from "../assetLoader/AssetLoader";
+import { PlayerBaloon, PiepsBurner } from "../assetLoader/AssetLoader";
 
 const MOVING_STATS = {
     MOVING_UP: "MOVING_UP"
@@ -21,6 +21,7 @@ export default class Player {
         if (!scene.textures.exists("PlayerBallon")) {scene.load.spritesheet("PlayerBallon", PlayerBaloon, {
             frameHeight: 127, frameWidth: 74
         })};
+        scene.load.audio("PiepsBurner", PiepsBurner);
     };
 
     static initAnimations(scene) {
@@ -46,6 +47,8 @@ export default class Player {
     };
 
     create(x, y) {
+        this.burner = this.scene.sound.add("PiepsBurner");
+        this.burner.volume = 0.2;
         this.pieps = this.scene.physics.add.sprite(x, y, "PlayerBallon").setScale(2).setDepth(3);
         this.pieps.setCollideWorldBounds(true);
         this.pieps.setBodySize(60, 127, true);
@@ -99,6 +102,7 @@ export default class Player {
         if (this.pieps && this.pieps.body) {
             if (this.controls.movingKeys.up.isDown && !this.isBlowing) {
                 this.blowFire();
+                this.burner.play();
             };
         };
     };

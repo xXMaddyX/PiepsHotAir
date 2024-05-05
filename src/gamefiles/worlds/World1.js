@@ -8,6 +8,7 @@ import {
     StartPlattform,
     HochausVer1,
     Berge,
+    AmbienteSound,
 } from "../assetLoader/AssetLoader";
 
 export default class World1 {
@@ -29,11 +30,15 @@ export default class World1 {
         if (!scene.textures.exists("lvl1StartPlattform")) {scene.load.image('lvl1StartPlattform', StartPlattform)};
         if (!scene.textures.exists("lvl1HochausVer1")) {scene.load.image('lvl1HochausVer1', HochausVer1)};
         if (!scene.textures.exists("lvl1Berge")) {scene.load.image('lvl1Berge', Berge)};
+        scene.load.audio("lvl1AmbienteSound", AmbienteSound);
     };
 
     initAnimations () {};
 
     create() {
+        //Add Sound
+        this.sound = this.scene.sound.add("lvl1AmbienteSound", {loop: true});
+
         World1Config.backgroundPositions.forEach(({x, y}) => {
             this.scene.add.image(x, y, "lvl1Background").setDepth(1);
         });
@@ -80,6 +85,10 @@ export default class World1 {
     };
 
     update(time, delta) {
+        if (!this.sound.isPlaying) {
+            this.sound.play();
+        };
+
         this.cloudsPool.forEach(clouds => {
             clouds.x -= 0.3
             if (clouds.x <= -960) {

@@ -39,7 +39,7 @@ const World1Config = {
         {posx: calcTilePosX(1920) - 100, posY: -1100, width: 1920, height: 200, direction: "RIGHT", speed: 30},
     ],
     PlanePositions: [
-        {x: 2400, y: -700},
+        {x: 6000, y: -700},
         //{x: 5000, y: -900}
     ],
 };

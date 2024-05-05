@@ -64,7 +64,7 @@ export default class SceneLvL1 extends Phaser.Scene {
 
     spawnThunderClouds() {
         this.thunderCloude = new ThunderCloudeClass(this, this.player);
-        this.thunderCloude.create(1500, -500);
+        this.thunderCloude.create(2000, -500);
     };
 
     create() {
@@ -111,7 +111,7 @@ export default class SceneLvL1 extends Phaser.Scene {
             plane.update();
             if (plane.plane.x < this.physics.world.bounds.x - 100) {
                 let RandomHeight = Phaser.Math.Between(-700, -900)
-                plane.plane.x = 6000;
+                plane.plane.x = 6000 + 2500;
                 plane.plane.y = RandomHeight;
             };
         });
