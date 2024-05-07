@@ -81,7 +81,7 @@ export default class Player {
     setFollowCamera(width, height) {
         this.scene.cameras.main.setBounds(0, -2048, width, height);
         this.scene.cameras.main.setDeadzone(50, 50);
-        this.scene.cameras.main.startFollow(this.pieps, false, 0.1, 0.1);
+        this.scene.cameras.main.startFollow(this.pieps, true, 1, 1);
     };
 
     blowFire() {
@@ -108,10 +108,6 @@ export default class Player {
         if (this.pieps.body.velocity.x < 5 && this.pieps.body.velocity.x > -5) {
             this.pieps.body.velocity.x = 0
         }
-    };
-
-    flagAnimationControl(direction) {
-
     };
 
     update(time, delta) {

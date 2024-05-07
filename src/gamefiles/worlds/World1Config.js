@@ -1,27 +1,31 @@
+const tileWidth = 1920
 const calcTilePosX = (actualTilePos) => {
     return actualTilePos + 960;
 };
 
 const World1Config = {
+    calcTilePosX,
+    tileWidth,
     backgroundPositions: [
-        {x: 960, y: -1024},
-        {x: 2880, y: -1024},
-        {x: 4800, y: -1024},
+        {x: calcTilePosX(0), y: -1024},
+        {x: calcTilePosX(tileWidth), y: -1024},
+        {x: calcTilePosX(tileWidth * 2), y: -1024},
     ],
     GroundPositions: [
-        {x: 960, y: -20},
-        {x: 2880, y: -20},
-        {x: 4800, y: -20},
+        {x: calcTilePosX(0), y: -20},
+        {x: calcTilePosX(tileWidth), y: -20},
+        {x: calcTilePosX(tileWidth * 2), y: -20},
     ],
     PlantsPositions : [
-        {x: 960, y: -40},
-        {x: 2880, y: -40},
-        {x: 4800, y: -40},
+        {x: calcTilePosX(0), y: -40},
+        {x: calcTilePosX(tileWidth), y: -40},
+        {x: calcTilePosX(tileWidth * 2), y: -40},
     ],
     CloudsPosistions: [
-        {x: 960, y: -1324},
-        {x: 2880, y: -1324},
-        {x: 4800, y: -1324},
+        {x: calcTilePosX(0), y: -1324},
+        {x: calcTilePosX(tileWidth), y: -1324},
+        {x: calcTilePosX(tileWidth * 2), y: -1324},
+        {x: calcTilePosX(tileWidth * 3), y: -1324},
     ],
     Berge: [
         {x: 300, y: -450},

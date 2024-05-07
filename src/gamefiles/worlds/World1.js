@@ -106,7 +106,7 @@ export default class World1 {
         this.cloudsPool.forEach(clouds => {
             clouds.x -= 0.3
             if (clouds.x <= -960) {
-                clouds.x = 4800
+                clouds.x = World1Config.calcTilePosX(World1Config.tileWidth * 3);
             };
 
             this.bergePool.forEach(Berg => {

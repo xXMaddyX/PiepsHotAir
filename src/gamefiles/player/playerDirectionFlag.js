@@ -45,7 +45,7 @@ export default class PlayerDirectionFlag {
     };
 
     create(x, y) {
-        this.smalFlag = this.scene.physics.add.sprite(x, y, "SmalFlagIdle").setScale(3).setDepth(2);
+        this.smalFlag = this.scene.physics.add.sprite(x, y, "SmalFlagIdle").setScale(2).setDepth(2);
         this.smalFlag.body.allowGravity = false;
         this.smalFlag.anims.play("SmalFlagIdle");
         this.actualState = "IDLE";
@@ -72,7 +72,7 @@ export default class PlayerDirectionFlag {
     update(time, delta) {
         if (this.smalFlag && this.smalFlag.body) {
             this.smalFlag.x = this.player.pieps.x;
-            this.smalFlag.y = this.player.pieps.y - 145;
+            this.smalFlag.y = this.player.pieps.y - 140;
         }
         this.flagHandler(this.player.WIND_DATA.DIRECTION);
     };
