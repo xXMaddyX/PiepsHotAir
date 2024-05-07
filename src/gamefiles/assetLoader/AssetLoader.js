@@ -8,6 +8,8 @@ import StartPlattform from '../assets/plattforms/StartPlattform.png';
 import HochausVer1 from '../assets/backgrounds/Hochhaus.png';
 import SmallHouse from '../assets/backgrounds/SmalHouse.png';
 import BigTree from '../assets/trees/Tree.png';
+import SmalFlag from '../assets/Player/smalFlag.png';
+import SmalFlagMoving from '../assets/Player/smalFlagMoving.png';
 
 //Sounds
 import AmbienteSound from '../assets/sounds/AmbienteSound.wav';
@@ -42,4 +44,6 @@ export {
     ThunderSound,
     Airplane,
     PiepsBurner,
+    SmalFlag,
+    SmalFlagMoving,
 };

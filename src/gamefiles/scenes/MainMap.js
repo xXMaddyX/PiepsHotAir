@@ -132,6 +132,7 @@ export default class SceneLvL1 extends Phaser.Scene {
         });
         if (!isOverlapping) {
             this.player.moveSlowdownFunc();
+            this.player.WIND_DATA.DIRECTION = "IDLE";
         };
     };
 };

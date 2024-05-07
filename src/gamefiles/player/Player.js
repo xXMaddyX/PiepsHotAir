@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import { PlayerBaloon, PiepsBurner } from "../assetLoader/AssetLoader";
+import PlayerDirectionFlag from "./playerDirectionFlag";
 
 const MOVING_STATS = {
     MOVING_UP: "MOVING_UP"
@@ -9,11 +10,13 @@ export default class Player {
     constructor(scene) {
         /**@type {Phaser.Scene} */
         this.scene = scene;
+        this.flagPool = [];
         this.timer = 2000;
         this.isBlowing = false;
         this.isWind = false;
         this.WIND_DATA = {
             SPEED: 0,
+            DIRECTION: "IDLE",
         }
     };
 
@@ -22,6 +25,8 @@ export default class Player {
             frameHeight: 127, frameWidth: 74
         })};
         scene.load.audio("PiepsBurner", PiepsBurner);
+
+        PlayerDirectionFlag.loadSprites(scene);
     };
 
     static initAnimations(scene) {
@@ -43,7 +48,9 @@ export default class Player {
             }),
             frameRate: 0,
             repeat: -1
-        })
+        });
+
+        PlayerDirectionFlag.initAnimations(scene);
     };
 
     create(x, y) {
@@ -52,6 +59,11 @@ export default class Player {
         this.pieps = this.scene.physics.add.sprite(x, y, "PlayerBallon").setScale(2).setDepth(3);
         this.pieps.setCollideWorldBounds(true);
         this.pieps.setBodySize(60, 127, true);
+
+        //Create Flag
+        let Flag = new PlayerDirectionFlag(this.scene, this);
+        Flag.create(this.pieps.x, this.pieps.y);
+        this.flagPool.push(Flag);
     };
 
     setWindData(direction, speed) {
@@ -80,11 +92,11 @@ export default class Player {
             this.pieps.anims.play("Player-Idle");
             this.isBlowing = false;
         });
-    }
+    };
 
     windHandler() {
         this.pieps.setAccelerationX(this.WIND_DATA.SPEED)
-    }
+    };
 
     moveSlowdownFunc() {
         if (this.pieps.body.velocity.x > 5) {
@@ -98,12 +110,19 @@ export default class Player {
         }
     };
 
+    flagAnimationControl(direction) {
+
+    };
+
     update(time, delta) {
         if (this.pieps && this.pieps.body) {
+            this.flagPool.forEach(flag => {
+                flag.update(time, delta);
+            });
             if (this.controls.movingKeys.up.isDown && !this.isBlowing) {
                 this.blowFire();
                 this.burner.play();
             };
         };
     };
-}
+};

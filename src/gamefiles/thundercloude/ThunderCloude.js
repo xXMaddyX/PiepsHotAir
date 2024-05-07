@@ -9,7 +9,7 @@ export default class ThunderCloudeClass {
         /**@type {Player} */
         this.player = player;
         this.isThunder = true;
-        this.delayTime = 15000;
+        this.delayTime = 0;
     };
 
     static loadSprites(scene) {
@@ -37,7 +37,8 @@ export default class ThunderCloudeClass {
 
     create(x, y) {
         this.sound = this.scene.sound.add("lvl1ThunderSound");
-
+        let calcDelay = Phaser.Math.Between(15000, 20000);
+        this.delayTime = calcDelay;
         this.ThunderCloude = this.scene.physics.add.sprite(x, y, "lvl1ThunderCloude").setDepth(3);
         this.ThunderCloude.setGravityY(-10);
     };
