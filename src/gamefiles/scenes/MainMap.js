@@ -74,7 +74,8 @@ export default class SceneLvL1 extends Phaser.Scene {
     create() {
         //Init Scene
         this.initScene();
-        
+        this.scene.launch("Pause");
+
         //Set WorldBunds
         this.physics.world.setBounds(0, -2048, this.worldBounds.worldWidth, this.worldBounds.worldHeight)
 
