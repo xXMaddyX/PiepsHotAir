@@ -18,7 +18,7 @@ export default new Phaser.Game({
         }
     },
     scene: [
-        new SceneLvL1(this),
-        new Pause(this),
+        SceneLvL1,
+        Pause,
     ]
 });
